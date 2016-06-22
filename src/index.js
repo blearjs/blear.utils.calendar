@@ -1,12 +1,12 @@
 'use strict';
 
 
-var date =   require('blear.utils.date');
+var date = require('blear.utils.date');
 var object = require('blear.utils.object');
 var string = require('blear.utils.string');
 var typeis = require('blear.utils.typeis');
-var fun =    require('blear.utils.function');
-var array =  require('blear.utils.array');
+var fun = require('blear.utils.function');
+var array = require('blear.utils.array');
 
 
 /**
@@ -160,6 +160,8 @@ exports.month = function calendar(year, month, options) {
                 nextMonth: true
             });
         }
+    } else {
+        i = 1;
     }
 
     var weeks = Math.ceil(list.length / 7);
