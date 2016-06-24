@@ -196,6 +196,7 @@ exports.month = function calendar(year, month, options) {
             calItemTime(item);
             item.day = (dayIndex + firstDayInWeek) % 7;
             item.week = index;
+            item.timeStamp = new Date(item.year, item.month, item.date);
             filter(item, index);
         });
         group.push(groupItem);
