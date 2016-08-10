@@ -195,7 +195,8 @@ exports.month = function calendar(year, month, options) {
             item.today = isToday(item);
             calItemTime(item);
             item.day = (dayIndex + firstDayInWeek) % 7;
-            item.week = index;
+            // 第几周
+            item.weeks = index;
             filter(item, index);
         });
         group.push(groupItem);
