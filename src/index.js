@@ -166,7 +166,7 @@ exports.month = function calendar(year, month, options) {
     while (list.length) {
         var groupItem = list.splice(0, 7);
         array.each(groupItem, function (dayIndex, item) {
-            item.id = date.id(item);
+            item.id = date.id(item.year, item.month, item.date);
             item.prevMonth = item.prevMonth || false;
             item.thisMonth = item.thisMonth || false;
             item.nextMonth = item.nextMonth || false;

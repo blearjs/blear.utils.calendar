@@ -7,6 +7,8 @@
 
 'use strict';
 
+var date = require('blear.utils.date');
+
 var calendar = require('../src/index.js');
 
 describe('index.js', function () {
@@ -69,13 +71,13 @@ describe('index.js', function () {
     it('.month:filter', function (done) {
         // 起始日期 20160411
         var startDate = new Date(2016, 3, 11);
-        startDate = calendar.wrap(startDate);
+        var startDateId = date.id(startDate);
         // 起始日期 20160422
         var endDate = new Date(2016, 3, 22);
-        endDate = calendar.wrap(endDate);
+        var endDateId = date.id(endDate);
         // 2016年4月
         var list = calendar.month(2016, 3, function (item) {
-            item.inScope = item.id >= startDate.id && item.id <= endDate.id;
+            item.inScope = item.id >=startDateId && item.id <= endDateId;
         });
         console.log(list);
         expect(list.length).toEqual(5);
