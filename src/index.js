@@ -38,7 +38,6 @@ var isToday = function (item) {
 };
 
 
-
 /**
  * 计算开始和结束时间戳
  * @param item
@@ -50,7 +49,6 @@ var calItemTime = function (item) {
 };
 
 
-
 var defaults = {
     /**
      * 一周的第一天星期几，默认为周日
@@ -59,12 +57,12 @@ var defaults = {
     firstDayInWeek: 0,
 
     /**
-     * 过滤器
+     * 遍历器
      * @type Function
      * @param item
      * @returns {*}
      */
-    filter: null
+    iterator: null
 };
 
 
@@ -75,17 +73,24 @@ var defaults = {
  * @param [options] {Object|Function} 配置
  * @param [options.firstDayInWeek=0] {Number} 一周的第一天星期几，默认为0，即星期日
  * @param [options.weeks] {undefined|Number} 日历显示几周，默认最小行数，可以指定6+行
- * @param [options.filter] {null} 过滤器
+ * @param [options.iterator] {null} 遍历器
  * @returns [Array] 月历数组
  */
 exports.month = function calendar(year, month, options) {
     if (typeis.Function(options)) {
         options = {
-            filter: options
+            iterator: options
         };
     }
 
     options = object.assign({}, defaults, options);
+
+    if (options.filter) {
+        if (typeof DEBUG !== 'undefined' && DEBUG) {
+            throw SyntaxError('请使用 `options.iterator` 代替 `options.filter`，' +
+                '下一个 y 版本将删除');
+        }
+    }
 
     var list = [];
     var prevDate = new Date(year, month - 1);
@@ -156,7 +161,7 @@ exports.month = function calendar(year, month, options) {
     // 分组
     var group = [];
     var index = 0;
-    var filter = fun.noop(options.filter);
+    var iterator = fun.noop(options.iterator || options.filter);
 
     while (list.length) {
         var groupItem = list.splice(0, 7);
@@ -170,7 +175,7 @@ exports.month = function calendar(year, month, options) {
             item.day = (dayIndex + firstDayInWeek) % 7;
             // 第几周
             item.weeks = index;
-            filter(item, index);
+            iterator(item, index);
         });
         group.push(groupItem);
         index++;
