@@ -61,21 +61,21 @@ var calItemTime = function (item) {
 };
 
 
-/**
- * 包裹日期
- * @param [d] {Date|Number} 日期
- * @returns {Object}
- */
-exports.wrap = function (d) {
-    d = date.parse(d);
-    var item = fixDateItem(d);
-
-    item.today = isToday(item);
-    item.id = generateDateid(item);
-    calItemTime(item);
-
-    return item;
-};
+// /**
+//  * 包裹日期
+//  * @param [d] {Date|Number} 日期
+//  * @returns {Object}
+//  */
+// exports.wrap = function (d) {
+//     d = date.parse(d);
+//     var item = fixDateItem(d);
+//
+//     item.today = isToday(item);
+//     item.id = generateDateid(item);
+//     calItemTime(item);
+//
+//     return item;
+// };
 
 
 var defaults = {

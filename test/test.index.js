@@ -10,23 +10,23 @@
 var calendar = require('../src/index.js');
 
 describe('index.js', function () {
-    it('.wrap', function () {
-        var d0 = new Date();
-        var d1 = calendar.wrap();
-        var d2 = calendar.wrap(new Date(2016, 3, 11));
-
-        expect(d1.year).toEqual(d0.getFullYear());
-        expect(d1.month).toEqual(d0.getMonth());
-        expect(d1.date).toEqual(d0.getDate());
-        expect(d1.today).toEqual(true);
-
-        expect(d2.year).toEqual(2016);
-        expect(d2.month).toEqual(3);
-        expect(d2.date).toEqual(11);
-        expect(d2.day).toEqual(1);
-        expect(d2.today).toEqual(false);
-        expect(d2.id).toEqual(20160411);
-    });
+    // it('.wrap', function () {
+    //     var d0 = new Date();
+    //     var d1 = calendar.wrap();
+    //     var d2 = calendar.wrap(new Date(2016, 3, 11));
+    //
+    //     expect(d1.year).toEqual(d0.getFullYear());
+    //     expect(d1.month).toEqual(d0.getMonth());
+    //     expect(d1.date).toEqual(d0.getDate());
+    //     expect(d1.today).toEqual(true);
+    //
+    //     expect(d2.year).toEqual(2016);
+    //     expect(d2.month).toEqual(3);
+    //     expect(d2.date).toEqual(11);
+    //     expect(d2.day).toEqual(1);
+    //     expect(d2.today).toEqual(false);
+    //     expect(d2.id).toEqual(20160411);
+    // });
 
     it('.month', function (done) {
         // 2016年4月
