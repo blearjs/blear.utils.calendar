@@ -3,7 +3,6 @@
 
 var date = require('blear.utils.date');
 var object = require('blear.utils.object');
-var string = require('blear.utils.string');
 var typeis = require('blear.utils.typeis');
 var fun = require('blear.utils.function');
 var array = require('blear.utils.array');
@@ -39,43 +38,17 @@ var isToday = function (item) {
 };
 
 
-/**
- * 生成日期ID
- * @param item {Object} 日对象
- * @private
- */
-var generateDateid = function (item) {
-    // 20150218
-    return [item.year, string.padStart(item.month + 1, 2, '0'), string.padStart(item.date, 2, '0')].join('') * 1;
-};
-
 
 /**
  * 计算开始和结束时间戳
  * @param item
  */
 var calItemTime = function (item) {
-    var thisDate = new Date(item.year, item.month, item.date, 0, 0, 0, 0);
-    item.startTime = thisDate.getTime();
-    item.endTime = item.startTime + date.DAY_TIME - 1;
+    var thisDate = new Date(item.year, item.month, item.date);
+    item.startTime = date.start(thisDate).getTime();
+    item.endTime = date.end(thisDate).getTime();
 };
 
-
-// /**
-//  * 包裹日期
-//  * @param [d] {Date|Number} 日期
-//  * @returns {Object}
-//  */
-// exports.wrap = function (d) {
-//     d = date.parse(d);
-//     var item = fixDateItem(d);
-//
-//     item.today = isToday(item);
-//     item.id = generateDateid(item);
-//     calItemTime(item);
-//
-//     return item;
-// };
 
 
 var defaults = {
@@ -188,7 +161,7 @@ exports.month = function calendar(year, month, options) {
     while (list.length) {
         var groupItem = list.splice(0, 7);
         array.each(groupItem, function (dayIndex, item) {
-            item.id = generateDateid(item);
+            item.id = date.id(item);
             item.prevMonth = item.prevMonth || false;
             item.thisMonth = item.thisMonth || false;
             item.nextMonth = item.nextMonth || false;
